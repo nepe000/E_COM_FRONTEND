@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
@@ -6,7 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import React from "react";
 import { registerSchema } from "@/schemas/register.schema";
-import GenderInput from "../component/ui/gender-input";
+import GenderInput from "./ui/gender-input";
+
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { register as registerUser } from "@/api/auth";
 
 const RegisterPage = () => {
   const {
@@ -26,11 +31,28 @@ const RegisterPage = () => {
     },
     resolver: yupResolver(registerSchema),
   });
+  const { mutate, error, isPending } = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (response) => {
+      console.log(response);
+      toast.success("Login Successful");
+      // Invalidate and refetch
+    },
+    onError: (error: any) => {
+      console.log(error);
+
+      toast.error(error?.response.data.message ?? "Login Failed");
+    },
+  });
 
   console.log(errors);
 
   const onSubmit: SubmitHandler<ISign> = (data) => {
     console.log(data);
+    const { confirm_password, gender, ...others } = data;
+
+    // Assuming 'value' is defined in scope
+    mutate({ ...others, gender });
   };
 
   return (

@@ -103,11 +103,13 @@ const Form = () => {
           </div>
 
           <button
+            disabled={isPending}
             type="submit"
-            className=" text-lg font-semibold px-4 py-3 bg-blue-500 rounded-md text-white cursor-pointer hover:bg-blue-700 transition-all duration-300"
+            className="text-lg font-semibold px-4 py-3 bg-blue-500 rounded-md text-white cursor-pointer disabled:cursor-not-allowed hover:bg-blue-700 transition-all duration-300"
           >
-            Submit
+            {isPending ? "Logging" : "Login"}
           </button>
+
           <p>
             <Link href="/register">
               Already have a account?
