@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
@@ -9,6 +10,9 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { LuAsterisk } from "react-icons/lu";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@/api/auth";
+import toast from "react-hot-toast";
 
 //form hook
 const Form = () => {
@@ -23,9 +27,25 @@ const Form = () => {
     },
     resolver: yupResolver(loginSchema),
   });
+  // Mutations
+  const { mutate, error, isPending } = useMutation({
+    mutationFn: login,
+    onSuccess: (response) => {
+      console.log(response);
+      toast.success("Login Successful");
+      // Invalidate and refetch
+    },
+    onError: (error) => {
+      console.log(error);
+
+      toast.error("Login Failed");
+    },
+  });
+
   console.log(errors);
-  const onSubmit: SubmitHandler<ILogin> = (data) => {
+  const onSubmit: SubmitHandler<ILogin> = async (data) => {
     console.log(data);
+    await mutate(data);
   };
   return (
     <div className="flex flex-col items-center justify-center">
@@ -45,9 +65,7 @@ const Form = () => {
             <input
               {...register("email")}
               type="text"
-              name="email"
               placeholder="johndoe@gmail.com"
-              required
               className={`text-lg border ${
                 errors.email
                   ? "border-red-500 text-red-500"
@@ -73,7 +91,6 @@ const Form = () => {
               type="text"
               name="password"
               placeholder="password"
-              required
               className={`text-lg border ${
                 errors.password
                   ? "border-red-500 text-red-500"

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Controller } from "react-hook-form";
@@ -21,11 +22,11 @@ const GenderInput: React.FC<IProps> = ({ control }) => {
         name="gender"
         control={control}
         rules={{ required: true }}
-        render={({ field }) => {
+        render={({ field: { value, ...others } }) => {
           return (
             <section>
               <h1>Gender</h1>
-              <Select {...field} options={options} />
+              <Select {...others} options={options} />
             </section>
           );
         }}
