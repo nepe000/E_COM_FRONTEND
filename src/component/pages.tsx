@@ -13,9 +13,12 @@ import { LuAsterisk } from "react-icons/lu";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/api/auth";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 //form hook
 const Form = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,13 +35,16 @@ const Form = () => {
     mutationFn: login,
     onSuccess: (response) => {
       console.log(response);
-      toast.success("Login Successful");
+
+      toast.success(response?.message || "Login Successful");
+      Cookies.set("access_token", response.token, { expires: 1 });
+      router.replace("/");
       // Invalidate and refetch
     },
     onError: (error) => {
       console.log(error);
 
-      toast.error("Login Failed");
+      toast.error(error?.message || "Login Failed");
     },
   });
 

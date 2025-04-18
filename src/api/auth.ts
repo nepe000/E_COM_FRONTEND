@@ -3,11 +3,15 @@ import api from "@/axios/api.axios";
 import { ILogin } from "@/interface/auth/auth.interface";
 
 export const login = async (data: ILogin) => {
-  console.log("first", data);
-  const response = await api.post("/user/login", data); //?end point , data
-  console.log(response);
+  try {
+    console.log("first", data);
+    const response = await api.post("/user/login", data); //?end point , data
+    console.log(response);
 
-  return response.data;
+    return response.data;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
 };
 
 export const register = async (data: any) => {
@@ -18,6 +22,6 @@ export const register = async (data: any) => {
     return response.data;
   } catch (error: any) {
     console.log("auth error", error);
-    return error;
+    throw error?.response?.data;
   }
 };

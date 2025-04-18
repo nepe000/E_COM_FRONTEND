@@ -11,7 +11,7 @@ import {
 const Footer = () => {
   return (
     <footer
-      className="bg-gray-300 text-white py-3 px-4 fixed bottom-0 w-full"
+      className="bg-gray-300 text-white py-3 px-4"
       style={{
         backgroundImage:
           "radial-gradient(circle, rgba(150,150,150,0.2) 10%, transparent 10%)",

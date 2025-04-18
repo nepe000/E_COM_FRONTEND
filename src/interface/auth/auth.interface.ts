@@ -15,3 +15,8 @@ export interface ISign {
   };
   confirm_password: string;
 }
+
+export interface IReview {
+  rating: number;
+  review: string;
+}

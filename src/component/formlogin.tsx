@@ -52,7 +52,7 @@ const RegisterPage = () => {
     const { confirm_password, gender, ...others } = data;
 
     // Assuming 'value' is defined in scope
-    mutate({ ...others, gender });
+    mutate({ ...others, gender: gender?.value });
   };
 
   return (
@@ -175,9 +175,11 @@ const RegisterPage = () => {
         </div>
 
         <button
+          disabled={isPending}
           type="submit"
           className="w-full text-lg font-semibold px-4 py-2 bg-blue-500 rounded-md text-white cursor-pointer hover:bg-blue-700 transition-all duration-300 mt-6"
         >
+          {isPending ? "Logging" : "Login"}
           Submit
         </button>
       </form>

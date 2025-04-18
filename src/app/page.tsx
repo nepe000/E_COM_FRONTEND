@@ -1,9 +1,17 @@
-import ProductCard from "./../component/product/product-card";
+import Hero from "@/component/home/hero";
+import SummerSale from "@/component/productlist/summerList";
+
+import TrendingProducts from "@/component/productlist/trendingProducts";
 
 export default function Home() {
   return (
-    <div>
-      <ProductCard />
-    </div>
+    <main>
+      <Hero />
+      <div className="px-6">
+        <SummerSale />
+
+        <TrendingProducts />
+      </div>
+    </main>
   );
 }

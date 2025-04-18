@@ -19,7 +19,7 @@ const Layout: React.FC<IProps> = ({ children }) => {
           <Header />
         </div>
       )}
-      <div className="min-h-[100vh]">{children}</div>
+      <div className="min-h-[100vh] mb-10">{children}</div>
       {!hideNav && (
         <div>
           <Footer />
