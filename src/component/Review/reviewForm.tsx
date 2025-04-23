@@ -32,10 +32,10 @@ const ReviewForm: React.FC<IProps> = ({ productId }) => {
     mode: "all",
   });
 
-  const { data: reviewData, isLoading } = useQuery({
-    queryFn: () => getProductReviews(productId),
-    queryKey: ["reviews", productId],
-  });
+  // const {} = useQuery({
+  //   queryFn: () => getProductReviews(productId),
+  //   queryKey: ["reviews", productId],
+  // });
 
   const { isPending, mutate } = useMutation({
     mutationFn: postReview,
