@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react/jsx-no-duplicate-props */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { ISign } from "@/interface/auth/auth.interface";

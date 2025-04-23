@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import React from "react";
 import { RatingStar } from "../ui/ratingstars";
 import { IReviews } from "@/interface/auth/review-interface";

@@ -1,6 +1,5 @@
 import ProductDetailS from "@/component/product/ProductDetail";
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 interface IProps {
   params: Promise<{ id: string }>;
 }

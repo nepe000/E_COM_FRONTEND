@@ -1,10 +1,16 @@
+"use client";
 import Link from "next/link";
 import React from "react";
+
 import { CiHeart } from "react-icons/ci";
 import { IoMdCart } from "react-icons/io";
 import { IoPersonSharp } from "react-icons/io5";
+import { FiLogOut } from "react-icons/fi"; // <-- Added this
+import { useAuth } from "@/context/auth.context";
 
 const Header = () => {
+  const { isAuthenticated, logout } = useAuth();
+  console.log(isAuthenticated);
   return (
     <>
       <div className=" tracking-wider flex justify-between items-center py-6 px-10">
@@ -37,32 +43,54 @@ const Header = () => {
             </Link>
           </div>
         </div>
-        <div className="flex gap-4 ">
-          <div>
-            <Link href={"/wishlist"}>
-              <CiHeart
-                className="text-gray-500 transition-all duration-300 hover:scale-[1.1]"
-                size={28}
-              />
+        {isAuthenticated ? (
+          <div className="flex gap-4 ">
+            <div>
+              <Link href={"/wishlist"}>
+                <CiHeart
+                  className="text-gray-500 transition-all duration-300 hover:scale-[1.1]"
+                  size={28}
+                />
+              </Link>
+            </div>
+            <div>
+              <Link href={"/cart"}>
+                <IoMdCart
+                  className="text-gray-500 transition-all duration-300 hover:scale-[1.1]"
+                  size={28}
+                />
+              </Link>
+            </div>
+            <div>
+              <Link href={"/login"}>
+                <IoPersonSharp
+                  className="text-gray-500 transition-all duration-300 hover:scale-[1.1]"
+                  size={25}
+                />
+              </Link>
+            </div>
+            <button
+              onClick={logout}
+              className="text-red-500 border border-red-500 px-3 py-2 rounded-md transition-all duration-300 hover:bg-red-100"
+              title="Logout"
+            >
+              <FiLogOut size={19} />
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-4 tracking-wider">
+            <Link href="/login">
+              <button className="text-lg font-semibold border border-blue-500 text-blue-500 px-3 py-2 min-w-[100px] rounded-md ">
+                Login
+              </button>
+            </Link>
+            <Link href="/sign-up">
+              <button className="text-lg font-semibold bg-blue-500 text-white px-3 py-2 min-w-[100px] rounded-md">
+                Register
+              </button>
             </Link>
           </div>
-          <div>
-            <Link href={"/cart"}>
-              <IoMdCart
-                className="text-gray-500 transition-all duration-300 hover:scale-[1.1]"
-                size={28}
-              />
-            </Link>
-          </div>
-          <div>
-            <Link href={"/login"}>
-              <IoPersonSharp
-                className="text-gray-500 transition-all duration-300 hover:scale-[1.1]"
-                size={25}
-              />
-            </Link>
-          </div>
-        </div>
+        )}
       </div>
     </>
   );

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { StarRating } from "react-flexible-star-rating";
 import React from "react";

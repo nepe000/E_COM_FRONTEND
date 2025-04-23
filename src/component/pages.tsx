@@ -15,10 +15,12 @@ import { login } from "@/api/auth";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/auth.context";
 
 //form hook
 const Form = () => {
   const router = useRouter();
+  const { setUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -38,6 +40,8 @@ const Form = () => {
 
       toast.success(response?.message || "Login Successful");
       Cookies.set("access_token", response.token, { expires: 1 });
+      localStorage.setItem("user", JSON.stringify(response.user));
+      setUser(response.user);
       router.replace("/");
       // Invalidate and refetch
     },

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { getProductReviews } from "@/api/review";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";

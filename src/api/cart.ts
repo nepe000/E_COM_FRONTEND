@@ -13,3 +13,21 @@ export const addToCart = async (data: {
     throw error.response.data;
   }
 };
+
+export const getCart = async () => {
+  try {
+    const response = await api.get("/cart");
+    return response?.data;
+  } catch (error: any) {
+    throw error?.response?.data;
+  }
+};
+
+export const deleteCart = async (productId: string) => {
+  try {
+    const response = await api.delete(`/cart/remove/${productId}`);
+    return response?.data;
+  } catch (error: any) {
+    throw error?.response?.data;
+  }
+};
