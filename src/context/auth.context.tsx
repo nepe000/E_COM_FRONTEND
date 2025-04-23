@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import {
   createContext,
@@ -8,15 +9,14 @@ import {
 } from "react";
 import Cookies from "js-cookie";
 
-// Define a User interface (you can expand this based on your actual user data)
 interface User {
-  id: string;
+  name: any;
+  _id: string;
   fullName: string;
   email: string;
-  role: "USER" | "ADMIN"; // or use an enum if you have one
+  role: "USER" | "ADMIN";
 }
 
-// Define the shape of the AuthContext
 interface AuthContextType {
   isAuthenticated: boolean;
   user: User | null;

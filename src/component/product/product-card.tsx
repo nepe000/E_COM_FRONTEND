@@ -12,6 +12,13 @@ interface IProp {
 
 const ProductCard: React.FC<IProp> = ({ product, wishlist = false }) => {
   const { coverImage, price, name } = product;
+  const fixedImageUrl = coverImage
+    ? (coverImage.startsWith("/") ? coverImage : `/${coverImage}`).replace(
+        /\\/g,
+        "/"
+      )
+    : "";
+
   return (
     <div className=" relative overflow-hidden tracking-wider border border-gray-300 w-fit rounded-md">
       {/* image */}
@@ -22,8 +29,8 @@ const ProductCard: React.FC<IProp> = ({ product, wishlist = false }) => {
           width={1000}
           src={
             coverImage
-              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${coverImage}`
-              : ""
+              ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${fixedImageUrl}`
+              : "/placeholder.jpg"
           }
           alt={name}
         />
